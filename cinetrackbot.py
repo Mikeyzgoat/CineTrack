@@ -366,13 +366,22 @@ async def myptw(ctx):
 async def topG(ctx):
     curr.execute(f"Select movie_name,avg(user_rating) from completed group by movie_name order by avg(user_rating) desc;")
     lt = curr.fetchall()
-    if len(lt)!=0:
+    if len(lt)>0 and len(lt)>=6:
         embed = discord.Embed(title="Community Favorites",color=0xFF5733)
         for i in range(0,6):
             embed.add_field(name=lt[i][0],value="Average rating : {0:.2f}⭐".format(lt[i][1]),inline=False)
         
         topg = await ctx.send(f"Here are the topG's",embed=embed)
         await topg.add_reaction('👑')
+    elif len(lt)<6 and len(lt) >0:
+        embed = discord.Embed(title="Community Favorites",color=0xFF5733)
+        for i in range(0,6):
+            embed.add_field(name=lt[i][0],value="Average rating : {0:.2f}⭐".format(lt[i][1]),inline=False)
+        
+        topg = await ctx.send(f"Here are the topG's",embed=embed)
+        await topg.add_reaction('👑')
+    else:
+        await ctx.reply(f"Users have not yet added any movie into completed list {ctx.author.mention}")
 
 @bot.command()
 async def genre(ctx):
