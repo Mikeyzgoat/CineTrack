@@ -104,7 +104,7 @@ async def movie(ctx,*,mname):
             embed = discord.Embed(title="Search results",color=0xFF5733)
 
             for t in range(len(st)):
-                embed.add_field(name=st[t],value=mov_id[t]+"\nGenre : "+", ".join(g[t]),inline=False)
+                embed.add_field(name=st[t],value=mov_id[t]+"\nGenre : "+", ".join(list(set(g[t]))),inline=False)
             await ctx.channel.send(embed=embed)
 
         else:
