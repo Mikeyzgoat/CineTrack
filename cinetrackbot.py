@@ -533,7 +533,7 @@ async def delmovie(ctx):
         
 @bot.command()
 async def topgen(ctx):
-    curr.execute(f"select user_genre, count(user_genre) as gen from my_fav_genre group by user_genre order by count(user_genre);")
+    curr.execute(f"select user_genre, count(user_genre) as gen from my_fav_genre group by user_genre order by count(user_genre) desc;")
     l = curr.fetchall()
     if len(l)!=0:
         embed = discord.Embed(title="Community Favorite Genres",color=0xFF5733)
